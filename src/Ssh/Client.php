@@ -68,7 +68,7 @@ class Client
             $command = escapeshellarg($command);
 
             $ssh = "ssh $sshArguments $host $command";
-            $process = new Process($ssh);
+            $process = Process::fromShellCommandline($ssh);
             $process
                 ->setTimeout($config['timeout'])
                 ->setTty(true)
@@ -89,7 +89,7 @@ class Client
             $ssh = "ssh $sshArguments $host $become '$shellCommand; printf \"[exit_code:%s]\" $?;'";
         }
 
-        $process = new Process($ssh);
+        $process = Process::fromShellCommandline($ssh);
         $process
             ->setInput($command)
             ->setTimeout($config['timeout']);
@@ -146,7 +146,7 @@ class Client
 
     private function isMultiplexingInitialized(Host $host, Arguments $sshArguments)
     {
-        $process = new Process("ssh -O check $sshArguments $host 2>&1");
+        $process = Process::fromShellCommandline("ssh -O check $sshArguments $host 2>&1");
         $process->run();
         return (bool)preg_match('/Master running/', $process->getOutput());
     }
