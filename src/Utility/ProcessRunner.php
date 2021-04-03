@@ -44,7 +44,7 @@ class ProcessRunner
 
         $this->pop->command($hostname, $command);
 
-        $process = new Process($command);
+        $process = Process::fromShellCommandLine($command);
         $process
             ->setTimeout($config['timeout'])
             ->setTty($config['tty'])
