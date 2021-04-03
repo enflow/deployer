@@ -79,6 +79,7 @@ class WorkerCommand extends Command
     {
         try {
             $this->doExecute($input, $output);
+            return 0;
         } catch (GracefulShutdownException $e) {
             $this->deployer->informer->taskException($e, $this->host);
             return 1;
