@@ -17,7 +17,7 @@ class ParallelTest extends DepCase
         require DEPLOYER_FIXTURES . '/recipe/deploy.php';
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         self::$currentPath = self::$tmpPath . '/localhost';
     }
@@ -31,8 +31,8 @@ class ParallelTest extends DepCase
             'verbosity' => OutputInterface::VERBOSITY_DEBUG
         ]);
 
-        self::assertContains('echo $0', $output, 'Missing output from worker.');
-        self::assertContains('Successfully deployed!', $output);
+        self::assertStringContainsString('echo $0', $output, 'Missing output from worker.');
+        self::assertStringContainsString('Successfully deployed!', $output);
         self::assertDirectoryExists(self::$currentPath . '/.dep');
         self::assertDirectoryExists(self::$currentPath . '/releases');
         self::assertDirectoryExists(self::$currentPath . '/shared');

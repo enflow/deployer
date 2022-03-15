@@ -58,7 +58,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function getVerbosity()
+    public function getVerbosity(): int
     {
         return $this->output->getVerbosity();
     }
@@ -74,7 +74,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function isDecorated()
+    public function isDecorated(): bool
     {
         return $this->output->isDecorated();
     }
@@ -90,7 +90,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormatter()
+    public function getFormatter(): OutputFormatterInterface
     {
         return $this->output->getFormatter();
     }
@@ -114,7 +114,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function isQuiet()
+    public function isQuiet(): bool
     {
         return self::VERBOSITY_QUIET === $this->getVerbosity();
     }
@@ -122,7 +122,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function isVerbose()
+    public function isVerbose(): bool
     {
         return self::VERBOSITY_VERBOSE <= $this->getVerbosity();
     }
@@ -130,7 +130,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function isVeryVerbose()
+    public function isVeryVerbose(): bool
     {
         return self::VERBOSITY_VERY_VERBOSE <= $this->getVerbosity();
     }
@@ -138,7 +138,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function isDebug()
+    public function isDebug(): bool
     {
         return self::VERBOSITY_DEBUG <= $this->getVerbosity();
     }

@@ -12,6 +12,7 @@ use Deployer\Component\PharUpdate\Console\Helper as PharUpdateHelper;
 use Deployer\Deployer;
 use Symfony\Component\Console\Application as Console;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -39,7 +40,7 @@ class Application extends Console
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultInputDefinition()
+    protected function getDefaultInputDefinition(): InputDefinition
     {
         $inputDefinition = parent::getDefaultInputDefinition();
 
@@ -53,7 +54,7 @@ class Application extends Console
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultCommands()
+    protected function getDefaultCommands(): array
     {
         $commands = parent::getDefaultCommands();
 
@@ -78,7 +79,7 @@ class Application extends Console
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultHelperSet()
+    protected function getDefaultHelperSet(): HelperSet
     {
         $helperSet = parent::getDefaultHelperSet();
 

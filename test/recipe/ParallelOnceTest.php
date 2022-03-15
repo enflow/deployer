@@ -17,7 +17,7 @@ class ParallelOnceTest extends DepCase
         require DEPLOYER_FIXTURES . '/recipe/parallel.php';
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         self::$currentPath = self::$tmpPath . '/localhost';
     }
@@ -32,9 +32,9 @@ class ParallelOnceTest extends DepCase
         ]);
 
         self::assertFileExists(self::$currentPath . '/deployed-host1');
-        self::assertFileNotExists(self::$currentPath . '/deployed-host2');
-        self::assertFileNotExists(self::$currentPath . '/deployed-host3');
-        self::assertFileNotExists(self::$currentPath . '/deployed-host4');
+        self::assertFileDoesNotExist(self::$currentPath . '/deployed-host2');
+        self::assertFileDoesNotExist(self::$currentPath . '/deployed-host3');
+        self::assertFileDoesNotExist(self::$currentPath . '/deployed-host4');
     }
 
     public function testOnceWithLimit()
@@ -48,8 +48,8 @@ class ParallelOnceTest extends DepCase
         ]);
 
         self::assertFileExists(self::$currentPath . '/deployed-host1');
-        self::assertFileNotExists(self::$currentPath . '/deployed-host2');
-        self::assertFileNotExists(self::$currentPath . '/deployed-host3');
-        self::assertFileNotExists(self::$currentPath . '/deployed-host4');
+        self::assertFileDoesNotExist(self::$currentPath . '/deployed-host2');
+        self::assertFileDoesNotExist(self::$currentPath . '/deployed-host3');
+        self::assertFileDoesNotExist(self::$currentPath . '/deployed-host4');
     }
 }

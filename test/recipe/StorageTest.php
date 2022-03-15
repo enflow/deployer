@@ -21,9 +21,9 @@ class StorageTest extends DepCase
             '--file' => DEPLOYER_FIXTURES . '/recipe/storage.php'
         ]);
 
-        self::assertContains('a:a', $output);
-        self::assertContains('b:b', $output);
-        self::assertContains('f:f', $output);
-        self::assertContains('abcdef', $output);
+        self::assertStringContainsString('a:a', $output);
+        self::assertStringContainsString('b:b', $output);
+        self::assertStringContainsString('f:f', $output);
+        self::assertStringContainsString('abcdef', $output);
     }
 }

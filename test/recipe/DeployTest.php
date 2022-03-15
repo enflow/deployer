@@ -17,7 +17,7 @@ class DeployTest extends DepCase
         require DEPLOYER_FIXTURES . '/recipe/deploy.php';
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         self::$currentPath = self::$tmpPath . '/localhost';
     }
@@ -25,7 +25,7 @@ class DeployTest extends DepCase
     public function testDeploy()
     {
         $output = $this->start('deploy', [], ['verbosity' => OutputInterface::VERBOSITY_DEBUG]);
-        self::assertContains('Successfully deployed!', $output);
+        self::assertStringContainsString('Successfully deployed!', $output);
         self::assertDirectoryExists(self::$currentPath . '/.dep');
         self::assertDirectoryExists(self::$currentPath . '/releases');
         self::assertDirectoryExists(self::$currentPath . '/shared');
@@ -64,7 +64,7 @@ class DeployTest extends DepCase
 
         self::assertEquals(4, exec("ls -1 releases | wc -l"));
         self::assertFileExists(self::$currentPath . '/current/ok.txt');
-        self::assertFileNotExists(self::$currentPath . '/current/fail.txt');
+        self::assertFileDoesNotExist(self::$currentPath . '/current/fail.txt');
     }
 
     /**
