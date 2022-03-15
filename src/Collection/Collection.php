@@ -27,6 +27,7 @@ class Collection implements CollectionInterface, \Countable
      *
      * @throws \InvalidArgumentException
      */
+    #[\ReturnTypeWillChange]
     public function get(string $name)
     {
         if ($this->has($name)) {
@@ -39,6 +40,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function has(string $name): bool
     {
         return array_key_exists($name, $this->values);
@@ -47,6 +49,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function set(string $name, $object)
     {
         $this->values[$name] = $object;
@@ -55,6 +58,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->values);
@@ -63,6 +67,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset): bool
     {
         return $this->has($offset);
@@ -71,6 +76,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->get($offset);
@@ -79,6 +85,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->set($offset, $value);
@@ -87,6 +94,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->values[$offset]);
@@ -95,6 +103,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function count(): int
     {
         return count($this->values);
@@ -103,6 +112,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * @return mixed[]
      */
+    #[\ReturnTypeWillChange]
     public function select(callable $callback): array
     {
         $values = [];
@@ -120,6 +130,7 @@ class Collection implements CollectionInterface, \Countable
      * @return mixed
      * @throws \InvalidArgumentException
      */
+    #[\ReturnTypeWillChange]
     public function first()
     {
         if ($this->count() === 0) {
@@ -132,6 +143,7 @@ class Collection implements CollectionInterface, \Countable
     /**
      * @return mixed[]
      */
+    #[\ReturnTypeWillChange]
     public function toArray(): array
     {
         return iterator_to_array($this);

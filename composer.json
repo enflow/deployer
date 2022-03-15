@@ -28,12 +28,11 @@
     ],
     "require": {
         "php": ">=7.2.5",
-        "deployer/phar-update": "~2.1",
         "pimple/pimple": "~3.0",
-        "symfony/console": "^5",
+        "symfony/console": "^5.0|^6.0",
         "symfony/polyfill-php80": "^1.22",
-        "symfony/process": "^5",
-        "symfony/yaml": "^5"
+        "symfony/process": "^5.0|^6.0",
+        "symfony/yaml": "^5.0|^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4.3"
