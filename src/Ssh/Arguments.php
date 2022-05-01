@@ -129,7 +129,7 @@ class Arguments
     private function generateControlPath(Host $host)
     {
         $connectionHashLength = 17; // Length of connection hash that OpenSSH appends to controlpath
-        $unixMaxPath = 100; // Theoretical max limit for path length
+        $unixMaxPath = 70; // Theoretical max limit for path length
         $homeDir = parse_home_dir('~');
         $port = empty($host->get('port', '')) ? '' : ':' . $host->getPort();
         $connectionData = "$host$port";
