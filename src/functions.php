@@ -776,3 +776,24 @@ function locateBinaryPath($name)
 
     throw new \RuntimeException("Can't locate [$nameEscaped] - neither of [command|which|type] commands are available");
 }
+
+/**
+ * Expand leading tilde (~) symbol in given path.
+ * Derived from https://github.com/deployphp/deployer/blob/1f38994a0082d61c4c5bd4357f3002c2bd3dae56/src/Support/helpers.php#L127
+ */
+function parse_home_dir(string $path): string
+{
+    if ('~' === $path || 0 === strpos($path, '~/')) {
+        if (isset($_SERVER['HOME'])) {
+            $home = $_SERVER['HOME'];
+        } elseif (isset($_SERVER['HOMEDRIVE'], $_SERVER['HOMEPATH'])) {
+            $home = $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
+        } else {
+            return $path;
+        }
+
+        return $home . substr($path, 1);
+    }
+
+    return $path;
+}
