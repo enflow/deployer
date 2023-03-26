@@ -37,7 +37,9 @@ class TaskCommand extends Command
     public function __construct($name, $description, Deployer $deployer)
     {
         parent::__construct($name);
-        $this->setDescription($description ?? '');
+        if ($description) {
+            $this->setDescription($description);
+        }
         $this->deployer = $deployer;
     }
 
@@ -157,7 +159,7 @@ class TaskCommand extends Command
                 throw $exception;
             }
         }
-        
+
         return 0;
     }
 

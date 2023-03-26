@@ -9,7 +9,7 @@ namespace Deployer\Ssh;
 
 use Deployer\Exception\Exception;
 use Deployer\Host\Host;
-use function Deployer\parse_home_dir;
+use Deployer\Support\Unix;
 
 /**
  * @author Michael Woodward <mikeymike.mw@gmail.com>
@@ -130,8 +130,8 @@ class Arguments
     {
         $connectionHashLength = 17; // Length of connection hash that OpenSSH appends to controlpath
         $unixMaxPath = 70; // Theoretical max limit for path length
-        $homeDir = parse_home_dir('~');
-        $port = empty($host->get('port', '')) ? '' : ':' . $host->getPort();
+        $homeDir = Unix::parseHomeDir('~');
+        $port = empty($host->getPort()) ? '' : ':' . $host->getPort();
         $connectionData = "$host$port";
         $tryLongestPossible = 0;
         $controlPath = '';
@@ -141,7 +141,7 @@ class Arguments
                     $controlPath = "$homeDir/.ssh/deployer_%C";
                     break;
                 case 2:
-                    $controlPath = "$homeDir/.ssh/" . hash("crc32", $connectionData);
+                    $controlPath = "$homeDir/.ssh/mux_%C";
                     break;
                 case 3:
                     throw new Exception("The multiplexing control path is too long. Control path is: $controlPath");
@@ -150,6 +150,7 @@ class Arguments
             }
             $tryLongestPossible++;
         } while (strlen($controlPath) + $connectionHashLength > $unixMaxPath); // Unix socket max length
+
         return $controlPath;
     }
 

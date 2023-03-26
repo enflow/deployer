@@ -7,8 +7,6 @@
 
 namespace Deployer;
 
-use Symfony\Component\Console\Output\OutputInterface;
-
 class ReleaseTest extends DepCase
 {
     protected function load()

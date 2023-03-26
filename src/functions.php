@@ -154,7 +154,7 @@ function task($name, $body = null)
             run($body);
         });
     } else {
-        throw new \InvalidArgumentException('Task should be an closure or array of other tasks.');
+        throw new \InvalidArgumentException('Task should be a closure, string or array of other tasks.');
     }
 
     $deployer->tasks->set($name, $task);
@@ -602,7 +602,7 @@ function ask($message, $default = null, $suggestedChoices = null)
  * @param string[] $availableChoices
  * @param string|null $default
  * @param bool|false $multiselect
- * @return array
+ * @return string|string[]
  * @codeCoverageIgnore
  */
 function askChoice($message, array $availableChoices, $default = null, $multiselect = false)

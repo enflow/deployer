@@ -1,6 +1,103 @@
 # Changelog
 
 
+## master
+[v6.8.0...master](https://github.com/deployphp/deployer/compare/v6.8.0...master)
+
+### Fixed
+- Symfony 4 recipe log and session folders ACL check [#2932]
+
+### Added
+- Ability to install the module's 6.8  under PHP 8 [#3159]
+
+## v6.8.0
+[v6.7.3...v6.8.0](https://github.com/deployphp/deployer/compare/v6.7.3...v6.8.0)
+
+### Added
+- Documented check_remote task usage
+- Speedup deploy:clear_paths
+- Documented default_timeout config usage
+- Recipe for Joomla!
+
+### Fixed
+- Fixed Silverstripe CMS recipe assets path [#1989]
+- Fixed check_remote task errors [#1990]
+- Fixed check_remote task revision resolution [#1994]
+- Fixed backward compatibility of bin/console for symfony4 recipe
+- Keep consistency with executable naming in lock recipe
+- Unexpected exception in config:* tasks when no stage is defined for host [#1909] [#1909] [#1909]
+- Fixed parsing of installed.json by Composer version 2
+- Fixed only call bin/php on the composer.phar file
+
+
+## v6.7.3
+[v6.7.2...v6.7.3](https://github.com/deployphp/deployer/compare/v6.7.2...v6.7.3)
+
+### Fixed
+- Fixed more Symfony 5 compatibility issues [#1971]
+
+
+## v6.7.2
+[v6.7.1...v6.7.2](https://github.com/deployphp/deployer/compare/v6.7.1...v6.7.2)
+
+### Fixed
+- Fixed compatibility with Symfony 4.x
+
+
+## v6.7.1
+[v6.7.0...v6.7.1](https://github.com/deployphp/deployer/compare/v6.7.0...v6.7.1)
+
+### Fixed
+- Fixed incompatibility with Symfony 5 [#1969]
+
+
+## v6.7.0
+[v6.6.0...v6.7.0](https://github.com/deployphp/deployer/compare/v6.6.0...v6.7.0)
+
+### Changed
+- Added Symfony 5 support
+
+
+## v6.6.0
+[v6.5.0...v6.6.0](https://github.com/deployphp/deployer/compare/v6.5.0...v6.6.0)
+
+### Added
+- Added doc page with sample "real-world" Deployer script
+
+### Fixed
+- Parameters `-f` or `--file` now are accepted also without the equal sign [#1479]
+
+
+## v6.5.0
+[v6.4.7...v6.5.0](https://github.com/deployphp/deployer/compare/v6.4.7...v6.5.0)
+
+### Added
+- Added `deploy:check_remote` task [#1755]
+
+
+## v6.4.7
+[v6.4.6...v6.4.7](https://github.com/deployphp/deployer/compare/v6.4.6...v6.4.7)
+
+### Added
+- A task to cache the event listeners manifest in Laravel [#1893]
+- Added `check_remote_head` option, by setting this to true, deployer will avoid unnecessary new releases by checking the remote git HEAD without cloning the repo [#1755]
+
+### Fixed
+- fixed invalid magic-property phpdoc in Deployer\Deployer class [#1899]
+- Updated `config:hosts` and `config:current` tasks to output only the selected stage
+
+
+## v6.4.6
+[v6.4.5...v6.4.6](https://github.com/deployphp/deployer/compare/v6.4.5...v6.4.6)
+
+### Added
+- Re-added the `artisan:view:clear` task
+
+### Changed
+- Change the default shared files in the Symfony4 recipe. The .env file is versionned now and not the .env.local [#1881]
+- Change the `artisan:view:cache` task to only run the `view:cache` command
+
+
 ## v6.4.5
 [v6.4.4...v6.4.5](https://github.com/deployphp/deployer/compare/v6.4.4...v6.4.5)
 
@@ -26,9 +123,7 @@
 - Fixed bug to execute ssh command on windows [#1775]
 - Fix when recipe/deploy/writable.php resolves <defunct> as one of http users.
 - Fix deployer detects wrong version [#1842]
-
-### Removed
-- Deploy:vendors from the wordpress recipe
+- Fix crashes on including autoloader in recipe file [#1602]
 
 
 ## v6.4.3
@@ -479,6 +574,16 @@
 - Fixed remove of shared dir on first deploy
 
 
+[#2932]: https://github.com/deployphp/deployer/issues/2932
+[#1994]: https://github.com/deployphp/deployer/issues/1994
+[#1990]: https://github.com/deployphp/deployer/issues/1990
+[#1989]: https://github.com/deployphp/deployer/issues/1989
+[#1971]: https://github.com/deployphp/deployer/pull/1971
+[#1969]: https://github.com/deployphp/deployer/issues/1969
+[#1909]: https://github.com/deployphp/deployer/issues/1909
+[#1899]: https://github.com/deployphp/deployer/pull/1899
+[#1893]: https://github.com/deployphp/deployer/pull/1893
+[#1881]: https://github.com/deployphp/deployer/pull/1881
 [#1876]: https://github.com/deployphp/deployer/pull/1876
 [#1842]: https://github.com/deployphp/deployer/pull/1842
 [#1822]: https://github.com/deployphp/deployer/issues/1822
@@ -491,6 +596,7 @@
 [#1775]: https://github.com/deployphp/deployer/pull/1775
 [#1764]: https://github.com/deployphp/deployer/pull/1764
 [#1758]: https://github.com/deployphp/deployer/pull/1758
+[#1755]: https://github.com/deployphp/deployer/issues/1755
 [#1709]: https://github.com/deployphp/deployer/issues/1709
 [#1708]: https://github.com/deployphp/deployer/pull/1708
 [#1677]: https://github.com/deployphp/deployer/pull/1677
@@ -499,6 +605,7 @@
 [#1661]: https://github.com/deployphp/deployer/pull/1661
 [#1634]: https://github.com/deployphp/deployer/pull/1634
 [#1603]: https://github.com/deployphp/deployer/issues/1603
+[#1602]: https://github.com/deployphp/deployer/issues/1602
 [#1583]: https://github.com/deployphp/deployer/issues/1583
 [#1580]: https://github.com/deployphp/deployer/pull/1580
 [#1575]: https://github.com/deployphp/deployer/pull/1575
@@ -513,6 +620,7 @@
 [#1488]: https://github.com/deployphp/deployer/issues/1488
 [#1481]: https://github.com/deployphp/deployer/issues/1481
 [#1480]: https://github.com/deployphp/deployer/issues/1480
+[#1479]: https://github.com/deployphp/deployer/issues/1479
 [#1476]: https://github.com/deployphp/deployer/pull/1476
 [#1472]: https://github.com/deployphp/deployer/pull/1472
 [#1463]: https://github.com/deployphp/deployer/pull/1463

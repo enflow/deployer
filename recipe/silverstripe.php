@@ -8,13 +8,23 @@ require_once __DIR__ . '/common.php';
  * Silverstripe configuration
  */
 
+set('shared_assets', function () {
+    if (test('[ -d {{release_path}}/public ]') || test('[ -d {{deploy_path}}/shared/public ]')) {
+        return 'public/assets';
+    }
+    return 'assets';
+});
+
+
 // Silverstripe shared dirs
 set('shared_dirs', [
-    'assets'
+    '{{shared_assets}}'
 ]);
 
 // Silverstripe writable dirs
-set('writable_dirs', ['assets']);
+set('writable_dirs', [
+    '{{shared_assets}}'
+]);
 
 // Silverstripe cli script
 set('silverstripe_cli_script', function () {

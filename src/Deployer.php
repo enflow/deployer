@@ -39,21 +39,21 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Deployer class represents DI container for configuring
  *
- * @property Application console
- * @property Task\TaskCollection|Task\Task[] tasks
- * @property Host\HostCollection|Collection|Host\Host[] hosts
- * @property Collection config
- * @property Rsync rsync
- * @property Ssh\Client sshClient
- * @property ProcessRunner processRunner
- * @property Task\ScriptManager scriptManager
- * @property Host\HostSelector hostSelector
- * @property SeriesExecutor seriesExecutor
- * @property ParallelExecutor parallelExecutor
- * @property Informer informer
- * @property Logger logger
- * @property ProcessOutputPrinter pop
- * @property Collection fail
+ * @property Application $console
+ * @property Task\TaskCollection|Task\Task[] $tasks
+ * @property Host\HostCollection|Collection|Host\Host[] $hosts
+ * @property Collection $config
+ * @property Rsync $rsync
+ * @property Ssh\Client $sshClient
+ * @property ProcessRunner $processRunner
+ * @property Task\ScriptManager $scriptManager
+ * @property Host\HostSelector $hostSelector
+ * @property SeriesExecutor $seriesExecutor
+ * @property ParallelExecutor $parallelExecutor
+ * @property Informer $informer
+ * @property Logger $logger
+ * @property ProcessOutputPrinter $pop
+ * @property Collection $fail
  */
 class Deployer extends Container
 {
@@ -319,12 +319,7 @@ class Deployer extends Container
         });
 
         // Require deploy.php file
-        if (is_readable($deployFile)) {
-            // Prevent variable leak into deploy.php file
-            call_user_func(function () use ($deployFile) {
-                require $deployFile;
-            });
-        }
+        self::loadRecipe($deployFile);
 
         // Run Deployer
         $deployer->init();
@@ -373,5 +368,48 @@ class Deployer extends Container
         }
 
         Reporter::report($stats);
+    }
+
+    /**
+     * Load recipe file
+     *
+     * @param string $deployFile
+     *
+     * @return void
+     * @codeCoverageIgnore
+     */
+    public static function loadRecipe($deployFile)
+    {
+        if (is_readable($deployFile)) {
+            // Prevent variable leak into deploy.php file
+            call_user_func(function () use ($deployFile) {
+                // reorder autoload stack.
+                $originStack = spl_autoload_functions();
+                require $deployFile;
+                $newStack = spl_autoload_functions();
+                if ($originStack[0] !== $newStack[0]) {
+                    foreach (array_reverse($originStack) as $loader) {
+                        spl_autoload_unregister($loader);
+                        spl_autoload_register($loader, true, true);
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * @return string
+     * @codeCoverageIgnore
+     */
+    public static function getCalledScript(): string
+    {
+        $executable = !empty($_SERVER['_']) ? $_SERVER['_'] : $_SERVER['PHP_SELF'];
+        $shortcut = false !== strpos(getenv('PATH'), dirname($executable)) ? basename($executable) : $executable;
+
+        if ($executable !== $_SERVER['PHP_SELF']) {
+            return sprintf('%s %s', $shortcut, $_SERVER['PHP_SELF']);
+        }
+
+        return $shortcut;
     }
 }
