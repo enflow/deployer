@@ -52,7 +52,7 @@ class SshCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $hostname = $input->getArgument('hostname');
         if (!empty($hostname)) {
@@ -64,7 +64,7 @@ class SshCommand extends Command
 
             if (count($hosts) === 0) {
                 $output->writeln('No remote hosts.');
-                return; // Because there are no hosts.
+                return 1; // Because there are no hosts.
             } elseif (count($hosts) === 1) {
                 $host = array_shift($hosts);
             } else {

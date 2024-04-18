@@ -73,7 +73,7 @@ class InitCommand extends Command
     /**
      * {@inheritDoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $template = $input->getOption('template');
         $directory = $input->getOption('directory');

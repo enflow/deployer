@@ -33,7 +33,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function write($messages, $newline = false, $type = self::OUTPUT_NORMAL)
+    public function write($messages, $newline = false, $type = self::OUTPUT_NORMAL): void
     {
         $this->wasWritten = true;
         $this->output->write($messages, $newline, $type);
@@ -42,7 +42,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function writeln($messages, $type = self::OUTPUT_NORMAL)
+    public function writeln($messages, $type = self::OUTPUT_NORMAL): void
     {
         $this->write($messages, true, $type);
     }
@@ -50,7 +50,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function setVerbosity($level)
+    public function setVerbosity($level): void
     {
         $this->output->setVerbosity($level);
     }
@@ -66,7 +66,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function setDecorated($decorated)
+    public function setDecorated($decorated): void
     {
         $this->output->setDecorated($decorated);
     }
@@ -82,7 +82,7 @@ class OutputWatcher implements OutputInterface
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(OutputFormatterInterface $formatter)
+    public function setFormatter(OutputFormatterInterface $formatter): void
     {
         $this->output->setFormatter($formatter);
     }

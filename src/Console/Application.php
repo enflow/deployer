@@ -121,7 +121,7 @@ class Application extends Console
     /**
      * {@inheritdoc}
      */
-    protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output)
+    protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output): int
     {
         $exception = null;
         $exitCode = 0;

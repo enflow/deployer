@@ -100,7 +100,7 @@ class TaskCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(Input $input, Output $output)
+    protected function execute(Input $input, Output $output): int
     {
         $stage = $input->hasArgument('stage') ? $input->getArgument('stage') : null;
         $roles = $input->getOption('roles');

@@ -76,7 +76,7 @@ class RunCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(Input $input, Output $output)
+    protected function execute(Input $input, Output $output): int
     {
         $command = $input->getArgument('command-to-run');
         $stage = $input->getOption('stage');

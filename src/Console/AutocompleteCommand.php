@@ -31,7 +31,7 @@ class AutocompleteCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('install')) {
             $output->write(<<<'BASH'
